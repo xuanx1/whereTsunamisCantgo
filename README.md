@@ -1,6 +1,6 @@
 # Where Tsunamis Can't Go
 ## Southeast Asia Edition
-![TRI](https://github.com/user-attachments/assets/4b3b46e1-09ef-43dc-bd11-cdb0b198f10e)
+![gis_sea](https://github.com/user-attachments/assets/e3166c2f-6364-4075-89a4-79a7a78b4010)
 
 ### Tsunami Risk Index
 ### Riskist Cities
