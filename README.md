@@ -1,14 +1,8 @@
-# Where Tsunamis Can't Go
+# Where Tsunamis Can't Go Preview
 ## Southeast Asia Edition
 ![gis_sea](https://github.com/user-attachments/assets/e3166c2f-6364-4075-89a4-79a7a78b4010)
 
-### Tsunami Risk Index
-### Riskist Cities
-1. Hanoi
-2. Ho Chi Minh City
-3. Bangkok-Manila
-4. Jakarta-Kuala Lumpur
-5. Singapore
+
 
 ### Bibliography | Data Sources
 NASA - ASTER Global Digital Elevation
