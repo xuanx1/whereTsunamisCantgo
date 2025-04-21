@@ -5,7 +5,7 @@ Created with QGIS
 ![gis_sea](https://github.com/user-attachments/assets/e3166c2f-6364-4075-89a4-79a7a78b4010)
 
 Hosted on Github Pages
-![Screenshot 2025-04-20 234922](https://github.com/user-attachments/assets/f2d90982-d8e1-4bbf-adee-448f97df9365)
+![Screenshot 2025-04-21 004437](https://github.com/user-attachments/assets/32b6f614-e7ee-44bb-bf0a-aea82c154d1a)
 
 ### Bibliography | Data Sources
 NASA - ASTER Global Digital Elevation
