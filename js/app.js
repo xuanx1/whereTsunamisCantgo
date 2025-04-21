@@ -12,7 +12,7 @@ const app = d3
 mapboxgl.accessToken = "pk.eyJ1IjoiZGV4dWFudCIsImEiOiJjbTlpNzdxZGswZDlsMmlwcmIzOWhrOGlzIn0.4-M0wnkyIrx9itmQEQ8Jxw";
 const map = new mapboxgl.Map({
   container: "map",
-  zoom: 1.5,
+  zoom: 1,
   center: [115.0, 5.0], // center of Southeast Asia
   pitch: 0, // ensure 2D view by setting pitch to 0
   bearing: 0, // ensure north-up orientation
@@ -20,10 +20,10 @@ const map = new mapboxgl.Map({
   attributionControl: false,
   collectResourceTiming: false,
   maxBounds: [
-    [80.0, -25.0], // sw corner bounding box
-    [145.0, 40.2], // ne corner bounding box
+    [80.0, -16.0], // sw corner bounding box
+    [145.0, 35.2], // ne corner bounding box
   ],
-  minZoom: 1.5,
+  minZoom: 1,
   maxZoom: 14,
   dragRotate: false, // disable 3D rotation
   pitchWithRotate: false, // disable pitch with rotate
@@ -169,6 +169,7 @@ mainTitle.style.fontSize = "48px";
 mainTitle.style.lineHeight = "1.2";
 mainTitle.style.color = "rgb(0, 202, 209)";
 mainTitle.style.fontWeight = "bold";
+mainTitle.style.textShadow = "-2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white, -2px 0 0 white, 2px 0 0 white, 0 -2px 0 white, 0 2px 0 white"; // 2px white outline
 
 const subTitle = document.createElement("p");
 subTitle.textContent = "Southeast Asia Edition";
@@ -176,6 +177,7 @@ subTitle.style.margin = "5px 0 0 0";
 subTitle.style.fontSize = "18.5px";
 subTitle.style.color = "rgb(117, 117, 117)";
 subTitle.style.opacity = "0.8";
+subTitle.style.textShadow = "-2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white, -2px 0 0 white, 2px 0 0 white, 0 -2px 0 white, 0 2px 0 white"; // 2px white outline
 
 titleContainer.appendChild(mainTitle);
 titleContainer.appendChild(subTitle);
@@ -416,12 +418,14 @@ highRiskCitiesContainer.style.overflowY = "auto";
 highRiskCitiesContainer.style.maxWidth = "250px";
 highRiskCitiesContainer.style.fontSize = "14px";
 highRiskCitiesContainer.style.color = "#444444"; // Set default text color to dark grey
+highRiskCitiesContainer.style.textShadow = "-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white"; // 1px white outline
 
 const title = document.createElement("h3");
 title.textContent = "Top 10 Riskiest Cities";
 title.style.marginTop = "0";
 title.style.color = "#444444"; // Changed from #019cde to dark grey
 title.style.fontSize = "16px";
+title.style.textShadow = "-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white"; // 1px white outline
 highRiskCitiesContainer.appendChild(title);
 
 const description = document.createElement("p");
@@ -429,12 +433,14 @@ description.innerHTML = "Based on Tsunami Risk Index (TSI), lower values indicat
 description.style.margin = "0 0 15px 0";
 description.style.fontSize = "12px";
 description.style.color = "#444444"; // Changed from #666 to dark grey
+description.style.textShadow = "-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white"; // 1px white outline
 highRiskCitiesContainer.appendChild(description);
 
 const cityList = document.createElement("ol");
 cityList.style.paddingLeft = "20px";
 cityList.style.margin = "0";
 cityList.style.color = "#444444"; // Set list text to dark grey
+cityList.style.textShadow = "-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white"; // 1px white outline
 
 const cities = [
   { name: "Banda Aceh, Indonesia", risk: "Fatally High Risk", color: "#9400d3" },
@@ -453,13 +459,15 @@ cities.forEach(city => {
   const listItem = document.createElement("li");
   listItem.style.marginBottom = "8px";
   listItem.style.color = "#444444"; // Set list item text to dark grey
+  listItem.style.textShadow = "-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white"; // 1px white outline
   
   const cityName = document.createElement("strong");
   cityName.textContent = city.name;
   cityName.style.color = "#444444"; // Set city name to dark grey
+  cityName.style.textShadow = "-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white"; // 1px white outline
   
   const riskInfo = document.createElement("div");
-  riskInfo.innerHTML = `<span style="color: ${city.color}; font-weight: bold;">■</span> <span style="color: #444444;">${city.risk}</span>`;
+  riskInfo.innerHTML = `<span style="color: ${city.color}; font-weight: bold;">■</span> <span style="color: #444444; text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;">${city.risk}</span>`;
   
   listItem.appendChild(cityName);
   listItem.appendChild(document.createElement("br"));
@@ -508,13 +516,11 @@ document.body.appendChild(highRiskCitiesContainer);
 
 // tsi
 map.on("load", () => {
-  // Load TSI values from grid_vect.geojson
   map.addSource("tsi-data", {
     type: "geojson",
     data: "data/grid_vect_with_tsi.geojson"
   });
 
-  // Add a layer for the TSI data - always visible
   map.addLayer({
     id: "tsi-points",
     type: "circle",
@@ -540,87 +546,79 @@ map.on("load", () => {
           0.19, "rgb(63, 63, 63)"  // lowest risk
         ]
       ],
-      "circle-opacity": 0.08
+      "circle-opacity": 0.1
     },
     layout: {
       visibility: "visible"
     }
   });
 
-  // Add hover functionality to TSI circles with debug logging
-  const popup = new mapboxgl.Popup({
-    closeButton: false,
-    closeOnClick: false,
-    className: 'tsi-popup',
-    maxWidth: '300px',
-    offset: 10 // Add an offset so the popup doesn't cover the exact point
-  });
-
-  // Style the popup to ensure visibility
-  const style = document.createElement('style');
-  style.textContent = `
-    .tsi-popup .mapboxgl-popup-content {
-      background-color: white;
-      border-radius: 4px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      z-index: 2000;
-    }
-    .tsi-popup .mapboxgl-popup-tip {
-      border-top-color: white;
-      z-index: 2000;
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Create a styled popup content
-  const createPopupContent = (coordinates, tsiValue) => {
-    // Determine risk class based on TSI value
-    let riskClass, riskColor;
-    if (tsiValue === null || tsiValue === undefined) {
-      riskClass =
-      riskClass = "Almost Unaffected";
-      riskColor = "rgb(63, 63, 63)";
-    }
-
-    // Format coordinates to 4 decimal places
-    const formattedLng = coordinates[0].toFixed(4);
-    const formattedLat = coordinates[1].toFixed(4);
+  //hover each point
+  map.on("mouseenter", "tsi-points", (e) => {
+    map.getCanvas().style.cursor = "pointer";
     
-    return `
-      <div style="padding: 8px;">
-        <div style="font-weight: bold; font-size: 14px; margin-bottom: 5px;">Location: ${formattedLng}, ${formattedLat}</div>
-        <div style="color: ${riskColor}; font-weight: bold;">Risk Level: ${riskClass}</div>
-        <div style="font-size: 12px;">TSI Value: ${tsiValue ? tsiValue.toFixed(3) : 'N/A'}</div>
-      </div>
-    `;
-  };
-
-  // Use map-wide mousemove event instead of layer-specific events
-  map.on('mousemove', (e) => {
-    // Query all rendered features at the cursor position from the 'tsi-points' layer
-    const features = map.queryRenderedFeatures(e.point, { layers: ['tsi-points'] });
-    
-    // Check if any TSI points were found
-    if (features.length > 0) {
-      map.getCanvas().style.cursor = 'pointer';
+    // Check if there are features and TSI data exists
+    if (e.features.length > 0 && e.features[0].properties.TSI !== null) {
+      // Get the TSI value
+      const tsi = e.features[0].properties.TSI;
+      const formattedTSI = parseFloat(tsi).toFixed(3);
       
-      // Get TSI value and coordinates
-      const coordinates = features[0].geometry.coordinates.slice();
-      const tsiValue = features[0].properties.TSI;
+      // Create popup
+      const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        className: 'tsi-popup',
+        maxWidth: 'none'
+      });
       
-      // Create and set popup content
+      // Create popup content
+      let riskLevel = "Unknown";
+      let color = "#666666";
+      
+      if (tsi <= 0.07) {
+        riskLevel = "Fatally High Risk";
+        color = "#9400d3";
+      } else if (tsi <= 0.10) {
+        riskLevel = "High Risk";
+        color = "#e85347";
+      } else if (tsi <= 0.13) {
+        riskLevel = "Moderate Risk";
+        color = "#f67a0a";
+      } else if (tsi <= 0.16) {
+        riskLevel = "Low Risk";
+        color = "#fed86b";
+      } else if (tsi <= 0.19) {
+        riskLevel = "Very Low Risk";
+        color = "#00be0e";
+      } else {
+        riskLevel = "Almost Unaffected";
+        color = "rgb(63, 63, 63)";
+      }
+      
+      // Set popup content and position
       popup
-        .setLngLat(coordinates)
-        .setHTML(createPopupContent(coordinates, tsiValue))
+        .setLngLat(e.lngLat)
+        .setHTML(`
+          <div style="padding: 8px; text-align: center; white-space: nowrap; color: #444444;">
+            <strong>TSI Value ${formattedTSI}</strong><br>
+            <span style="color: ${color};"><strong>${riskLevel}</strong></span>
+          </div>
+        `)
         .addTo(map);
-    } else {
-      // No TSI points under cursor, reset cursor and remove popup
-      map.getCanvas().style.cursor = '';
-      popup.remove();
+      
+      // Store popup in the map object to access it on mouseleave
+      map.tsiPopup = popup;
     }
   });
-
-
+  
+  map.on("mouseleave", "tsi-points", () => {
+    map.getCanvas().style.cursor = "";
+    if (map.tsiPopup) {
+      map.tsiPopup.remove();
+      map.tsiPopup = null;
+    }
+  });
+    
 
   // tsi legend 
   const legend = document.createElement('div');
@@ -629,19 +627,21 @@ map.on("load", () => {
   legend.style.top = '200px';
   legend.style.left = '7px';
   legend.style.padding = '15px';
-  legend.style.backgroundColor = 'transparent'; // Removed background
+  legend.style.backgroundColor = 'transparent';
   legend.style.borderRadius = '7px';
-  // legend.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.1)';
   legend.style.fontSize = '14px';
   legend.style.zIndex = '1000';
   legend.style.display = 'block';
-  legend.style.color = '#444444'; // Dark grey text
+  legend.style.color = '#444444';
+  legend.style.textShadow = '-2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white, -2px 0 0 white, 2px 0 0 white, 0 -2px 0 white, 0 2px 0 white';
+  legend.style.pointerEvents = 'none'; // Add pointer-events: none to legend
 
   const title = document.createElement('div');
   title.innerHTML = '<strong>Tsunami Risk Index</strong>';
   title.style.marginBottom = '10px';
-  title.style.color = '#444444'; // Dark grey text
-  title.style.fontSize = '16px'; // Set title size to 16px
+  title.style.color = '#444444';
+  title.style.fontSize = '16px';
+  title.style.textShadow = '-2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white, -2px 0 0 white, 2px 0 0 white, 0 -2px 0 white, 0 2px 0 white';
   legend.appendChild(title);
 
   const categories = [
@@ -666,10 +666,12 @@ map.on("load", () => {
     colorBox.style.display = 'inline-block';
     colorBox.style.marginRight = '10px';
     colorBox.style.borderRadius = '3px';
+    colorBox.style.outline = '2px solid white';
 
     const label = document.createElement('span');
     label.textContent = item.label;
     label.style.color = '#444444';
+    label.style.textShadow = '-2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white, -2px 0 0 white, 2px 0 0 white, 0 -2px 0 white, 0 2px 0 white';
 
     category.appendChild(colorBox);
     category.appendChild(label);
@@ -677,6 +679,20 @@ map.on("load", () => {
   });
 
   document.body.appendChild(legend);
+  
+  // Fix the high risk cities container to allow mouse events through
+  setTimeout(() => {
+    const highRiskCitiesContainer = document.querySelector('.highRiskCitiesContainer, [style*="top: 20px"][style*="right: 85px"]');
+    if (highRiskCitiesContainer) {
+      highRiskCitiesContainer.style.pointerEvents = 'none';
+    }
+    
+    // Fix title container to allow mouse events through
+    const titleContainer = document.querySelector('[style*="top: 20px"][style*="left: 20px"]');
+    if (titleContainer) {
+      titleContainer.style.pointerEvents = 'none';
+    }
+  }, 100);
 });
 
 
@@ -1265,3 +1281,68 @@ async function getPopulationDensityScore(coordinates) {
 //   console.log(`Population Density Score for Jakarta: ${score.toFixed(2)}`);
 // });
 
+
+
+// Define countries to show
+const countriesToShow = [
+  "IDN", "VNM", "LAO", "BRN", "THA", "MMR", "PHL", 
+  "KHM", "TLS", "SGP", "MYS", "CHN", "AUS", "PLW"
+];
+
+// Make sure we handle both initial load and style changes
+map.on("load", function() {
+  showCountryLabels();
+});
+
+map.on("style.load", function() {
+  showCountryLabels();
+});
+
+function showCountryLabels() {
+  // First hide all labels
+  map.getStyle().layers.forEach(layer => {
+    if (layer.type === "symbol" && layer.layout && layer.layout["text-field"]) {
+      map.setLayoutProperty(layer.id, "visibility", "none");
+    }
+  });
+  
+  // Find and show only country labels for selected countries
+  const labelLayerIds = [];
+  map.getStyle().layers.forEach(layer => {
+    // Look for country label layers (different Mapbox styles use different naming patterns)
+    if (layer.id.includes("country-label") || 
+        layer.id.includes("country_label") || 
+        (layer.id.includes("label") && layer.source === "composite")) {
+      
+      console.log("Found country label layer:", layer.id);
+      labelLayerIds.push(layer.id);
+      
+      // Make the layer visible
+      map.setLayoutProperty(layer.id, "visibility", "visible");
+      
+      // Apply filter for specific countries
+      try {
+        map.setFilter(layer.id, ["in", ["get", "iso_3166_1_alpha_3"], ...countriesToShow]);
+      } catch (e) {
+        // Try alternative filter syntax
+        map.setFilter(layer.id, ["in", ["get", "iso_3166_1_alpha_3"], ["literal", countriesToShow]]);
+      }
+      
+      // Enhance label visibility
+      map.setPaintProperty(layer.id, "text-color", "#444444");
+      map.setPaintProperty(layer.id, "text-halo-width", 2);
+      map.setPaintProperty(layer.id, "text-halo-color", "white");
+    }
+  });
+  
+  // Ensure country labels appear on top of circle layers
+  // Wait a moment to ensure all layers are loaded
+  setTimeout(() => {
+    // Move each label layer to the top
+    labelLayerIds.forEach(layerId => {
+      if (map.getLayer(layerId)) {
+        map.moveLayer(layerId); // This moves the layer to the top of the stack
+      }
+    });
+  }, 200);
+}
