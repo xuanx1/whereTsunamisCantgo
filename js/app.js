@@ -9,7 +9,7 @@ const app = d3
   .style("padding", "0")
   .style("overflow", "hidden");
 
-mapboxgl.accessToken = "pk.eyJ1IjoiZGV4dWFudCIsImEiOiJjbTlpNzdxZGswZDlsMmlwcmIzOWhrOGlzIn0.4-M0wnkyIrx9itmQEQ8Jxw";
+mapboxgl.accessToken = "pk.eyJ1IjoieHVhbngxMTEiLCJhIjoiY201dWhwZ2diMTg3dTJrcHRrZGx0eXc4diJ9.6k2pJftWF7A8MMzcVbWshg";
 const map = new mapboxgl.Map({
   container: "map",
   zoom: 1,
